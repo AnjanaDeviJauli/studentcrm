@@ -2,10 +2,13 @@ package org.perscholas.studentcrm;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.perscholas.studentcrm.data.AddressRepoI;
 import org.perscholas.studentcrm.data.CourseRepoI;
 import org.perscholas.studentcrm.data.MyUserRepoI;
+import org.perscholas.studentcrm.model.Address;
 import org.perscholas.studentcrm.model.Course;
 import org.perscholas.studentcrm.model.MyUser;
+import org.perscholas.studentcrm.service.AddressService;
 import org.perscholas.studentcrm.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,12 +27,16 @@ public class MyCommandLineRunner implements CommandLineRunner {
     MyUserRepoI myUserRepoI;
     CourseRepoI courseRepoI;
     MyUserService myUserService;
+    AddressService addressService;
+    AddressRepoI addressRepoI;
 
     @Autowired
-    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService) {
+    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService, AddressService addressService, AddressRepoI addressRepoI) {
         this.myUserRepoI = myUserRepoI;
         this.courseRepoI = courseRepoI;
         this.myUserService = myUserService;
+        this.addressService = addressService;
+        this.addressRepoI = addressRepoI;
     }
 
     @Override
@@ -42,6 +49,13 @@ public class MyCommandLineRunner implements CommandLineRunner {
         courseRepoI.save(new Course("Java", "seckin@gmail.com"));
 
         myUserService.saveCourseToUser("jafer@gmail.com","Java");
+
+
+        addressService.addAddressToUser(new Address("1234 tree court", "#123", "Dallas", "TX", "75555"),"jafer@gmail.com");
+        addressService.addAddressToUser(new Address("456 tree court", "#555", "Plano", "TX", "75545"),"jafer@gmail.com");
+
+
+
 
     }
 }

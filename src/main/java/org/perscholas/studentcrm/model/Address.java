@@ -5,9 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -37,7 +35,7 @@ public class Address {
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "addresses", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    private List<MyUser> myUsers = new ArrayList<>();
+    Set<MyUser> myUsers = new HashSet<>();
 
     public void addUser(MyUser myUser){
         myUsers.add(myUser);

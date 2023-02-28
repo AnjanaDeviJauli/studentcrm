@@ -6,9 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -45,7 +43,7 @@ public class MyUser {
         this.courses = courses;
     }
 
-    public MyUser(String firstName, String lastName, String email, String password, List<Address> addresses) {
+    public MyUser(String firstName, String lastName, String email, String password, Set<Address> addresses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -54,7 +52,7 @@ public class MyUser {
     }
 
 
-    public MyUser(String firstName, String lastName, String email, String password, List<Course> courses, Image image, List<Address> addresses) {
+    public MyUser(String firstName, String lastName, String email, String password, List<Course> courses, Image image, Set<Address> addresses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -92,7 +90,7 @@ public class MyUser {
     @JoinTable(name = "users_and_addresses",
             joinColumns = @JoinColumn(name = "my_user_id"),
             inverseJoinColumns = @JoinColumn(name = "addresses_id"))
-    List<Address> addresses = new ArrayList<>();
+    Set<Address> addresses = new HashSet<>();
 
     public void addAddress(Address address){
         addresses.add(address);

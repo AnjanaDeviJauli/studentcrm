@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 @Service
 
-@Transactional(rollbackOn = DataAccessException.class)
+@Transactional(rollbackOn = Exception.class)
 public class MyUserService {
 
     MyUserRepoI myUserRepoI;
@@ -28,7 +28,7 @@ public class MyUserService {
 
     }
 
-    public MyUser saveCourseToUser(String email, String courseName) throws SQLException {
+    public MyUser saveCourseToUser(String email, String courseName) throws Exception {
 
         if(myUserRepoI.findByEmailAllIgnoreCase(email).isPresent() && courseRepoI.findByNameAllIgnoreCase(courseName).isPresent()) {
             MyUser myUser = myUserRepoI.findByEmailAllIgnoreCase(email).get();
@@ -37,7 +37,7 @@ public class MyUserService {
             return myUser;
 
         } else {
-            throw new SQLException();
+            throw new Exception("saving a course to the user " + email + " did not go well!!!!!");
         }
 
 
