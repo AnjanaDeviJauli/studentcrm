@@ -47,12 +47,16 @@ public class MyCommandLineRunner implements CommandLineRunner {
         myUserRepoI.saveAndFlush(
                 new MyUser("Seckin", "Dogaroglu","seckin@gmail.com", "password"));
         courseRepoI.save(new Course("Java", "seckin@gmail.com"));
+        myUserRepoI.saveAndFlush(
+                new MyUser("amira", "alhaboubi","amira@gmail.com", "password"));
 
         myUserService.saveCourseToUser("jafer@gmail.com","Java");
 
 
         addressService.addAddressToUser(new Address("1234 tree court", "#123", "Dallas", "TX", "75555"),"jafer@gmail.com");
         addressService.addAddressToUser(new Address("456 tree court", "#555", "Plano", "TX", "75545"),"jafer@gmail.com");
+        addressService.addAddressToUser(new Address("456 tree court", "#555", "Plano", "TX", "75545"),"amira@gmail.com");
+
 
 
 

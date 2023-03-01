@@ -7,7 +7,6 @@ import org.perscholas.studentcrm.data.MyUserRepoI;
 import org.perscholas.studentcrm.model.Address;
 import org.perscholas.studentcrm.model.MyUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
