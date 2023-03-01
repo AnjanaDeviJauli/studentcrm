@@ -2,6 +2,7 @@ package org.perscholas.studentcrm.service;
 
 import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.perscholas.studentcrm.data.CourseRepoI;
 import org.perscholas.studentcrm.data.MyUserRepoI;
 import org.perscholas.studentcrm.model.Course;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 
 @Service
-
+@Slf4j
 @Transactional(rollbackOn = Exception.class)
 public class MyUserService {
 
@@ -40,8 +41,23 @@ public class MyUserService {
             throw new Exception("saving a course to the user " + email + " did not go well!!!!!");
         }
 
+    }
 
 
+    public MyUser createOrUpdate(MyUser user){
+        if(myUserRepoI.findByEmailAllIgnoreCase(user.getEmail()).isPresent()) {
+            log.debug("User email " + user.getEmail() + " exists!");
+            MyUser originalUser = myUserRepoI.findByEmailAllIgnoreCase(user.getEmail()).get();
+            originalUser.setFirstName(user.getFirstName());
+            originalUser.setLastName(user.getLastName());
+            originalUser.setPassword(user.getPassword());
+
+            return myUserRepoI.save(originalUser);
+
+        } else {
+            log.debug("User email " + user.getEmail() + " do not exists!");
+            return myUserRepoI.save(user);
+        }
 
     }
 

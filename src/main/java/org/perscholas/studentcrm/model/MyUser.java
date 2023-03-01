@@ -63,7 +63,7 @@ public class MyUser {
     }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
 
     String firstName;
 

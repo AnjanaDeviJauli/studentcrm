@@ -64,6 +64,38 @@
           </div>
         </div>
         <!-- ROW ENDS -->
+
+        <div class="row gx-4 justify-content-center">
+          <div class="col-lg-8">
+            <h2>All Courses</h2>
+            <table class="table table-hover text-uppercase">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Course Name</th>
+                  <th scope="col">Instructor Email</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="course: ${allCourses}">
+                  <th scope="row" th:text="${course.id}">1</th>
+                  <td th:text="${course.name}">Mark</td>
+                  <td th:text="${course.instructorEmail}">Otto</td>
+                  <td>
+                    <a th:href="@{/admin/deletecourse/}+${course.id}"
+                      ><i class="bi bi-trash"></i
+                    ></a>
+                    <!-- <a th:href="@{/admin/deletecourse(id=${course.id})}">delete</i></a> -->
+
+                    <!-- <i class="bi bi-trash"></i> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- ROW ENDS -->
       </div>
     </section>
     <!-- Services section-->
