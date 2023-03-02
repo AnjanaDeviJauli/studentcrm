@@ -11,6 +11,7 @@ import org.perscholas.studentcrm.model.Course;
 import org.perscholas.studentcrm.model.MyUser;
 import org.perscholas.studentcrm.service.AddressService;
 import org.perscholas.studentcrm.service.CatService;
+import org.perscholas.studentcrm.service.ImageService;
 import org.perscholas.studentcrm.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,20 +35,28 @@ public class MyCommandLineRunner implements CommandLineRunner {
     AddressService addressService;
     AddressRepoI addressRepoI;
     CatService catService;
-@Autowired
-    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService, AddressService addressService, AddressRepoI addressRepoI, CatService catService) {
+
+    ImageService imageService;
+
+    @Autowired
+    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService, AddressService addressService, AddressRepoI addressRepoI, CatService catService, ImageService imageService) {
         this.myUserRepoI = myUserRepoI;
         this.courseRepoI = courseRepoI;
         this.myUserService = myUserService;
         this.addressService = addressService;
         this.addressRepoI = addressRepoI;
         this.catService = catService;
+        this.imageService = imageService;
     }
 
     @Value("${cat.api}")
     String cat;
     @Override
     public void run(String... args) throws Exception {
+
+
+        imageService.init();
+
         Cat c = null;
         log.debug("CAT API: "  + cat);
 //        RestTemplate restTemplate = new RestTemplate();
