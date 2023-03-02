@@ -45,6 +45,8 @@ public class AdminController {
     public String dash(Model model){
         List<MyUser> allUsers = myUserRepoI.findAll();
 
+        // allUsers.forEach(myUser -> log.debug("url form dashboard controller: " + myUser.getImage().getUrl()));
+
         model.addAttribute("myUser", allUsers);
         List<Course> allCourses = courseRepoI.findAll();
         model.addAttribute("allCourses",allCourses);

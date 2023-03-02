@@ -29,6 +29,7 @@
             <table class="table table-hover text-uppercase">
               <thead>
                 <tr>
+                  <th scope="col">Profile Image</th>
                   <th scope="col">#</th>
                   <th scope="col">First</th>
                   <th scope="col">Last</th>
@@ -39,6 +40,15 @@
               </thead>
               <tbody>
                 <tr th:each="user: ${myUser}">
+
+                  <td>
+                    <div th:if="${user.image} != null">
+                      <a th:href="@{${user.image.url}}" >
+                    <img th:src="@{${user.image.url}}" class="img-thumbnail">
+                      </a>
+                  </div>
+                  </td>
+
                   <th scope="row" th:text="${user.id}">1</th>
                   <td th:text="${user.firstName}">Mark</td>
                   <td th:text="${user.lastName}">Otto</td>

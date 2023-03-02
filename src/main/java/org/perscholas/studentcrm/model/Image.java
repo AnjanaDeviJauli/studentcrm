@@ -26,8 +26,9 @@ public class Image {
     String url;
 
 
+    @ToString.Exclude
     @NonNull
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "my_user_id")
     MyUser myUser;
 

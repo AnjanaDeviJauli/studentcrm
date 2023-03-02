@@ -82,7 +82,8 @@ public class MyUser {
 
 
 
-    @OneToOne(mappedBy = "myUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @OneToOne(mappedBy = "myUser", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     Image image;
 
 
