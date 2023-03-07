@@ -24,6 +24,6 @@ public class CourseService {
         if(wantToDelete.isPresent())
             courseRepoI.delete(wantToDelete.get());
         else
-            throw new Exception("Can't find the course" + wantToDelete);
+            throw new Exception("Can't find the course" );
     }
 }

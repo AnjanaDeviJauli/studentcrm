@@ -42,7 +42,9 @@ public class AdminController {
     }
 
     @GetMapping("dashboard")
-    public String dash(Model model){
+    public String dash(Model model) throws Exception {
+
+
         List<MyUser> allUsers = myUserRepoI.findAll();
 
         // allUsers.forEach(myUser -> log.debug("url form dashboard controller: " + myUser.getImage().getUrl()));
@@ -52,6 +54,8 @@ public class AdminController {
         model.addAttribute("allCourses",allCourses);
         log.debug(allCourses.toString());
         log.debug(allUsers.toString());
+
+
 
 
 

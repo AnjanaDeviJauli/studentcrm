@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 
@@ -23,14 +24,14 @@ public class MyUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = setPassword(password);
     }
 
     public MyUser(String firstName, String lastName, String email, String password, Image image) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = setPassword(password);
         this.image = image;
     }
 
@@ -39,7 +40,7 @@ public class MyUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = setPassword(password);
         this.courses = courses;
     }
 
@@ -47,7 +48,7 @@ public class MyUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = setPassword(password);
         this.addresses = addresses;
     }
 
@@ -56,7 +57,7 @@ public class MyUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.password = setPassword(password);
         this.courses = courses;
         this.image = image;
         this.addresses = addresses;
@@ -71,8 +72,12 @@ public class MyUser {
 
     String email;
 
+    @Setter(AccessLevel.NONE)
     String password;
 
+    public String setPassword(String password) {
+        return this.password = new BCryptPasswordEncoder().encode(password);
+    }
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "users_and_courses",

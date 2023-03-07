@@ -33,7 +33,7 @@ public class AddressService {
 
         if (myUserRepoI.findByEmailAllIgnoreCase(userEmail).isPresent()) {
             log.debug("found user email " + userEmail);
-            MyUser user = myUserRepoI.findByEmailAllIgnoreCase(userEmail).get();
+            MyUser user = myUserRepoI.findByEmailAllIgnoreCase(userEmail).orElseThrow(Exception::new);
             if(addressRepoI.findByAddressOneAndAddressTwoAndCityAndStateAndZipCodeAllIgnoreCase(address.getAddressOne()
                     , address.getAddressTwo()
                     , address.getCity()

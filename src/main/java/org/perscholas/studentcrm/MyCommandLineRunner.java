@@ -3,12 +3,10 @@ package org.perscholas.studentcrm;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.perscholas.studentcrm.data.AddressRepoI;
+import org.perscholas.studentcrm.data.AuthGroupRepoI;
 import org.perscholas.studentcrm.data.CourseRepoI;
 import org.perscholas.studentcrm.data.MyUserRepoI;
-import org.perscholas.studentcrm.model.Address;
-import org.perscholas.studentcrm.model.Cat;
-import org.perscholas.studentcrm.model.Course;
-import org.perscholas.studentcrm.model.MyUser;
+import org.perscholas.studentcrm.model.*;
 import org.perscholas.studentcrm.service.AddressService;
 import org.perscholas.studentcrm.service.CatService;
 import org.perscholas.studentcrm.service.ImageService;
@@ -38,8 +36,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     ImageService imageService;
 
+    AuthGroupRepoI authGroupRepoI;
+
     @Autowired
-    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService, AddressService addressService, AddressRepoI addressRepoI, CatService catService, ImageService imageService) {
+    public MyCommandLineRunner(MyUserRepoI myUserRepoI, CourseRepoI courseRepoI, MyUserService myUserService, AddressService addressService, AddressRepoI addressRepoI, CatService catService, ImageService imageService, AuthGroupRepoI authGroupRepoI) {
         this.myUserRepoI = myUserRepoI;
         this.courseRepoI = courseRepoI;
         this.myUserService = myUserService;
@@ -47,6 +47,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
         this.addressRepoI = addressRepoI;
         this.catService = catService;
         this.imageService = imageService;
+        this.authGroupRepoI = authGroupRepoI;
     }
 
     @Value("${cat.api}")
@@ -83,6 +84,10 @@ public class MyCommandLineRunner implements CommandLineRunner {
         addressService.addAddressToUser(new Address("456 tree court", "#555", "Plano", "TX", "75545"),"amira@gmail.com");
 
 
+        authGroupRepoI.save(new AuthGroup("jafer@gmail.com", "ROLE_ADMIN"));
+        authGroupRepoI.save(new AuthGroup("jafer@gmail.com", "ROLE_USER"));
+        authGroupRepoI.save(new AuthGroup("seckin@gmail.com", "ROLE_ADMIN"));
+        authGroupRepoI.save(new AuthGroup("amira@gmail.com", "ROLE_USER"));
 
 
 
